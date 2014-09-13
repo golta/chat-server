@@ -39,7 +39,7 @@ class Server:
         c.send("<= Login Name?\n")
         c.send("=> ")
 
-    # handle displaying rooms
+    # handle room display's
     def displayrooms(self, client):
         client.send("<= Active rooms are: \n")
 	for key in self.rooms.keys():
@@ -47,12 +47,20 @@ class Server:
         client.send("<= end of the list. \n")
         client.send("=> ")
     
+    # handle room joining's
     def joinroom(self, roomname, client):
         client.send("<= Entering room: " + roomname + "." + "\n")
+        # check if room is there
         if roomname in self.rooms.keys():
             users = self.rooms[roomname]
-            users.append(client)
+            
+            # notify other for new user addition
             for user in users:
+		user.send("* new user joined "+ roomname + ": " + user.screenname)
+            users.append(client)
+            
+            # format the message
+	    for user in users:
                 if user.screenname == client.screenname:
                     client.send("<= " + "* " + str(user.screenname) + " (** This is you )" + "\n")
                 else:
@@ -62,9 +70,10 @@ class Server:
 	else:
             client.send("<= Wrong room name. \n")
             client.send("=> ")
-                    
+    
+    # handle chat leaving's               
     def leavechat(self, client):
-        client.send("<= User has left chat: " + client.screenname + "(** This is you)" +"\n")
+        client.send("<= * User has left chat: " + client.screenname + "(** This is you)" +"\n")
         self.inputs.remove(client)
         client.send("=> ")
 
@@ -103,7 +112,7 @@ class Server:
 		else:
 		    # The client session has not set a screenname
 		    # The first message we receive from them should contain the screen name
-		    #   (limit 12 characters
+		    #   (limit 12 characters)
 		    for c in self.inputs:
 			if isinstance(c, Client):
 			    if (msg[:12] == c.screenname):
@@ -178,7 +187,7 @@ class Server:
                 elif s == sys.stdin:
                     # Handle standard input
                     inp = sys.stdin.readline().rstrip()
-                    self.process_console_command(inp)
+                    #self.process_console_command(inp)
 
                 elif isinstance(s, Client):
                     # Process a message from a connected client
