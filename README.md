@@ -5,8 +5,9 @@ open-source scalable asynchronous chat-server to connect multiple host.
 
 How to Run
 ----------
-code bash:
+``` bash:
      python chatserver.py
+```
 
 Server
 ------
@@ -15,9 +16,9 @@ Chat server will be running on localhost with port number 5555
 Cliet
 ------
 Client can connect to it using telene e.g.
-code bash:
+``` bash:
      telnet locahost 5555
-
+```
 Specification
 -------------
 * Multiple user can connect
