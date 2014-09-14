@@ -3,24 +3,23 @@ chat-server
 
 open-source scalable asynchronous chat-server to connect multiple host.
 
-How to Run
-----------
+###H3 How to Run
+
 ``` bash:
      python chatserver.py
 ```
 
-Server
-------
+###H3 Server
+
 Chat server will be running on localhost with port number 5555
 
-Cliet
-------
+###H3 Cliet
+
 Client can connect to it using telene e.g.
 ``` bash:
-     telnet locahost 5555
+     telnet localhost 5555
 ```
-Specification
--------------
+###H3 Specification
 * Multiple user can connect
 * Inbuilt Chat rooms
 * Aysnchronous execution
